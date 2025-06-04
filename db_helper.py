@@ -1,6 +1,6 @@
 import mysql.connector
 import os
-
+from decimal import Decimal 
 # MySQL connection (uses environment variables and TiDB PEM)
 cnx = mysql.connector.connect(
     host=os.environ.get("MYSQL_HOST", "localhost"),
@@ -25,8 +25,8 @@ def insert_order_item(food_item_name, quantity, order_id):
             print(f"Food item '{food_item_name}' not found in food_items table.")
             return -1
 
-        item_id, price = item
-        total_price = price * quantity
+        item_id, price = item  # price is Decimal
+        total_price = price * Decimal(quantity)  # 👈 this fixes the error
 
         # Insert into orders table
         insert_query = """
