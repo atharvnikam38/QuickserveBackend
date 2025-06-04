@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: chatbot-backend
+    env: python
+    buildCommand: pip install -r requirement.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    plan: free
+    envVars:
+      - key: MYSQL_HOST
+        value: localhost
+      - key: MYSQL_USER
+        value: root
+      - key: MYSQL_PASSWORD
+        value: atharvnikam12345
+      - key: MYSQL_DB
+        value: quickserve
