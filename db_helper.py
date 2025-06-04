@@ -3,11 +3,16 @@ import mysql.connector
 global cnx
 import os
 
+ssl_ca_path = os.path.join(os.path.dirname(__file__), "tidb-ca.pem")
+
+
 cnx = mysql.connector.connect(
-    host=os.environ.get("MYSQL_HOST", "localhost"),
-    user=os.environ.get("MYSQL_USER", "root"),
-    password=os.environ.get("MYSQL_PASSWORD", "atharvnikam12345"),
-    database=os.environ.get("MYSQL_DB", "quickserve")
+    host=os.environ.get("MYSQL_HOST"),
+    user=os.environ.get("MYSQL_USER"),
+    password=os.environ.get("MYSQL_PASSWORD"),
+    database=os.environ.get("MYSQL_DB"),
+    port=int(os.environ.get("MYSQL_PORT", 4000)),
+    ssl_ca=ssl_ca_path
 )
 
 # mycursor = cnx.cursor()
